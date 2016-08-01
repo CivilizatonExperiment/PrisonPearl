@@ -197,4 +197,9 @@ public class PrisonPearlConfig {
 	public static boolean isDebug() {
 		return PrisonPearlPlugin.getInstance().GetConfig().get("debug").getBool();
 	}
+        
+        @CivConfig(name = "growthfactor", def = "0.1", type = CivConfigType.Double)
+        public static double getGrowthFactor() {
+            return PrisonPearlPlugin.getInstance().GetConfig().get("growthfactor").getDouble();
+        }
 }

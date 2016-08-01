@@ -493,7 +493,9 @@ public class PrisonPearlManager {
 			message = message + "Pearl Id: " + prisonerId + " in a " + pp.getHolderBlockState().getType();
 			ItemStack requirement = new ItemStack(PrisonPearlConfig.getResourceUpkeepMaterial(), 
 					PrisonPearlConfig.getResourceUpkeepAmount());
-			int requirementSize = requirement.getAmount();
+                        double growthFactor = PrisonPearlConfig.getGrowthFactor();
+                        double intervalFactor = (System.currentTimeMillis() - pp.getImprisonTime()) / feedDelay; 
+                        int requirementSize = (int) Math.floor(requirement.getAmount() * Math.pow(growthFactor, intervalFactor));
 
 			if(inv[0].containsAtLeast(requirement,requirementSize)) {
 				int pearlnum;
