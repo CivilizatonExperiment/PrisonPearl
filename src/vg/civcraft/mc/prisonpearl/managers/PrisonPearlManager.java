@@ -168,6 +168,14 @@ public class PrisonPearlManager {
 					" uuid: " + pp.getImprisonedId());
 			return false;
 		}
+                
+                // Check if player has costs in order to pearl person. If not, cancel event. Otherwise, remove items.
+                ItemStack pearlingCost = new ItemStack(PrisonPearlConfig.getResourceUpkeepMaterial(), PrisonPearlConfig.getPearlingCost());
+                if(!imprisoner.getInventory().contains(pearlingCost)) {
+                    return false;
+                }
+                imprisoner.getInventory().remove(pearlingCost);
+                
 		if (isMercuryEnabled)
 			MercuryManager.updateLocationToMercury(pp, PrisonPearlEvent.Type.NEW);
 		pp.markMove();

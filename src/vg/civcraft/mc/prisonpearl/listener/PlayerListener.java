@@ -513,6 +513,14 @@ public class PlayerListener implements Listener {
 	
 	private void updatePearlHolder(PrisonPearl pearl, InventoryHolder holder, Cancellable event) {
 		
+            // If holder anything but player, and contains max number of pearls, cancel event
+            if(!(holder instanceof Player)) {
+                if(holder.getInventory().contains(Material.ENDER_PEARL, PrisonPearlConfig.getMaxPearlsPerContainer())) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+            
 		if (holder instanceof Chest) {
 			updatePearl(pearl, (Chest) holder);
 		} else if (holder instanceof DoubleChest) {
